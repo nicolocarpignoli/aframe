@@ -4,7 +4,6 @@
 	<script src="https://unpkg.com/aframe@0.8.2/dist/aframe-master.js"></script>
 	<script src="https://unpkg.com/aframe-extras@4.1.2/dist/aframe-extras.loaders.min.js"></script>
 	<script src="https://unpkg.com/three@0.95.0/examples/js/libs/inflate.min.js"></script>
-	<script src="aframe-fbx-material.js"></script>
 </head>
 <body>
 	<script>
@@ -38,37 +37,29 @@
 			var data = this.data;
 			var schema = this.schema;
 
-
 			this.el.addEventListener('model-loaded', e => {
 
-				// get 3d object
 				object = e.detail.model;
 
-				console.log(object);
+				// console.log(object);
 
-				// traverse all object nodes
 				object.traverse(node => {
 
-					// if node is a mesh (geometry + material)
 					if (node.isMesh) {
 
 						if (data.target !== '' && node.name !== data.target)
 							return;
 
-						// grab the node material
 						let m = node.material;
-						// m.needsUpdate = true;
+						m.needsUpdate = true;
 
-						// loop through all components
 						for (var prop in data){
 
-							// grab the component value
 							var d = data[prop];
 
 							if (d === null || d === '')
 								return;
 
-							// check the value type, referencing the schema
 							switch (schema[prop].type){
 								case 'map':
 									var src = (d.nodeType > 0) ? d.getAttribute('src') : d;
