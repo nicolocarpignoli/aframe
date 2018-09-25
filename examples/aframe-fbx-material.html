@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/aframe@0.8.2/dist/aframe-master.js"></script>
+    <script src="https://unpkg.com/aframe-extras@4.1.2/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://unpkg.com/three@0.95.0/examples/js/libs/inflate.min.js"></script>
+    <script src="../aframe-fbx-material.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="diffuse" src="../assets/MariaDiffuse.png">
+            <img id="normal" src="../assets/MariaNormal.png">
+            <img id="specular" src="../assets/MariaSpecular.png">
+        </a-assets>
+        <a-entity
+            fbx-model="src: url(../assets/Maria.fbx)"
+            fbx-material="src: #diffuse; normalMap: #normal; specularMap: #specular;"
+            position="0 0 -2"
+            scale=".01 .01 .01"
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
+
