@@ -4,7 +4,7 @@ AFRAME.registerComponent('frame', {
 	},
 	init: function () {
 		const self = this
-		const SIZE = this.data.zize
+		const SIZE = this.data.size
 		const HALF_PI = Math.PI / 2
 
 		self.el.id = 'frame'
