@@ -7,7 +7,7 @@ AFRAME.registerComponent('frame', {
 		const SIZE = this.data.zize
 		const HALF_PI = Math.PI / 2
 
-		self.id = 'frame'
+		self.el.id = 'frame'
 
 		for (let pos of ['top', 'bottom', 'left', 'right']) {
 			let plane = document.createElement('a-plane')
