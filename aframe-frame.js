@@ -1,7 +1,7 @@
 AFRAME.registerComponent('frame', {
 	schema: {
 		size: { default: 3 },
-		scale: { default: 30 }
+		scale: { default: 100 }
 	},
 	init: function () {
 		const self = this
