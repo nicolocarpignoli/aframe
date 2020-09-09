@@ -1,7 +1,7 @@
 AFRAME.registerComponent('frame', {
 	schema: {
 		size: { default: 2 },
-		scale: { default: 40 }
+		scale: { default: 100 }
 	},
 	init: function () {
 		const self = this
@@ -16,33 +16,24 @@ AFRAME.registerComponent('frame', {
 		for (let pos of ['top', 'bottom', 'left', 'right']) {
 			let plane = document.createElement('a-plane')
 			plane.id = pos
-			plane.setAttribute('rotation', '-90 0 0')
-			//plane.object3D.rotation.set(-HALF_PI, 0, 0);
+			plane.object3D.rotation.set(-HALF_PI, 0, 0)
 			plane.setAttribute('occlude', true)
 			switch (pos) {
 				case 'right':
-					plane.setAttribute('position', `${SIZE + SCALE / 2} 0 0`)
-					plane.setAttribute('scale', `${SCALE} ${SCALE} 1`)
-					//plane.object3D.position.set(SIZE + SCALE / 2, 0, 0);
-					//plane.object3D.scale.set(SCALE, SCALE, 1);
+					plane.object3D.position.set(SIZE + SCALE / 2, 0, 0)
+					plane.object3D.scale.set(SCALE, SCALE, 1)
 					break
 				case 'left':
-					plane.setAttribute('position', `${-(SIZE + SCALE / 2)} 0 0`)
-					plane.setAttribute('scale', `${SCALE} ${SCALE} 1`)
-					//plane.object3D.position.set(-(SIZE + SCALE / 2), 0, 0);
-					//plane.object3D.scale.set(SCALE, SCALE, 1);
+					plane.object3D.position.set(-(SIZE + SCALE / 2), 0, 0)
+					plane.object3D.scale.set(SCALE, SCALE, 1)
 					break
 				case 'top':
-					plane.setAttribute('position', `0, 0, ${-(SIZE + SCALE / 2)}`)
-					plane.setAttribute('scale', `${SCALE * 3} ${SCALE} 1`)
-					//plane.object3D.position.set(0, 0, -(SIZE + SCALE / 2));
-					//plane.object3D.scale.set(SCALE * 3, SCALE, 1);
+					plane.object3D.position.set(0, 0, -(SIZE + SCALE / 2))
+					plane.object3D.scale.set(SCALE * 3, SCALE, 1)
 					break
 				case 'bottom':
-					plane.setAttribute('position', `0, 0, ${SIZE + SCALE / 2}`)
-					plane.setAttribute('scale', `${SCALE * 3} ${SCALE} 1`)
-					//plane.object3D.position.set(0, 0, SIZE + SCALE / 2);
-					//plane.object3D.scale.set(SCALE * 3, SCALE, 1);
+					plane.object3D.position.set(0, 0, SIZE + SCALE / 2)
+					plane.object3D.scale.set(SCALE * 3, SCALE, 1)
 					break
 			}
 			self.update()
