@@ -6,17 +6,13 @@ AFRAME.registerComponent('ar-toggle', {
   init: function() {
     const embedded = this.el.getAttributeNode('embedded')
     const arjs = this.el.getAttributeNode('arjs')
-
     const marker = document.querySelector(this.data.marker)
     const parent = document.querySelector(this.data.parent)
-
     const cloneVR = document.createElement('a-entity')
     cloneVR.innerHTML = parent.innerHTML
     cloneVR.setAttribute('visible', false)
     cloneVR.id = 'clone-vr'
-
     this.el.appendChild(cloneVR)
-
     window.ondblclick = () => {
       if (this.el.hasAttribute('arjs')) {
         marker.setAttribute('visible', false)
