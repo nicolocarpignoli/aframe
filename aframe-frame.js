@@ -3,7 +3,7 @@ AFRAME.registerComponent('frame', {
 		size: { default: 2 },
 		scale: { default: 100 }
 	},
-	init: function () {
+	init: function() {
 		const self = this
 		const SIZE = this.data.size * 0.25
 		const SCALE = this.data.scale
@@ -14,30 +14,30 @@ AFRAME.registerComponent('frame', {
 		self.el.object3D.scale.set(1, 1, 1)
 
 		for (let pos of ['top', 'bottom', 'left', 'right']) {
-			let plane = document.createElement('a-plane')
-			plane.id = pos
-			plane.object3D.rotation.set(-HALF_PI, 0, 0)
-			plane.setAttribute('occlude', true)
+			let part = document.createElement('a-box')
+			part.id = pos
+			part.object3D.rotation.set(-HALF_PI, 0, 0)
+			part.setAttribute('occlude', true)
 			switch (pos) {
 				case 'right':
-					plane.object3D.position.set(SIZE + SCALE / 2, 0, 0)
-					plane.object3D.scale.set(SCALE, SCALE, 1)
+					part.object3D.position.set(SIZE + SCALE / 2, 0, 0)
+					part.object3D.scale.set(SCALE, SCALE, 1)
 					break
 				case 'left':
-					plane.object3D.position.set(-(SIZE + SCALE / 2), 0, 0)
-					plane.object3D.scale.set(SCALE, SCALE, 1)
+					part.object3D.position.set(-(SIZE + SCALE / 2), 0, 0)
+					part.object3D.scale.set(SCALE, SCALE, 1)
 					break
 				case 'top':
-					plane.object3D.position.set(0, 0, -(SIZE + SCALE / 2))
-					plane.object3D.scale.set(SCALE * 3, SCALE, 1)
+					part.object3D.position.set(0, 0, -(SIZE + SCALE / 2))
+					part.object3D.scale.set(SCALE * 3, SCALE, 1)
 					break
 				case 'bottom':
-					plane.object3D.position.set(0, 0, SIZE + SCALE / 2)
-					plane.object3D.scale.set(SCALE * 3, SCALE, 1)
+					part.object3D.position.set(0, 0, SIZE + SCALE / 2)
+					part.object3D.scale.set(SCALE * 3, SCALE, 1)
 					break
 			}
 			self.update()
-			self.el.appendChild(plane)
+			self.el.appendChild(part)
 		}
 	}
 })
