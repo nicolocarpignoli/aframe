@@ -7,27 +7,31 @@ AFRAME.registerComponent('ar-toggle', {
 		const embedded = this.el.getAttributeNode('embedded')
 		const arjs = this.el.getAttributeNode('arjs')
 
-		const sceneAR = document.querySelector(this.data.marker)
-		var cloneAR, cloneVR
+		const marker = document.querySelector(this.data.marker)
+		const parent = document.querySelector(this.data.parent)
 
-		window.onclick = () => {
-			if (this.el.hasAttribute('embedded')) {
+		const cloneVR = document.createElement('a-entity')
+		cloneVR.innerHTML = parent.innerHTML
+		cloneVR.setAttribute('visible', false)
+		cloneVR.id = 'clone-vr'
+
+		this.el.appendChild(cloneVR)
+
+		window.ondblclick = () => {
+			toggleAttributes()
+			if (this.el.hasAttribute('arjs')) {
+				marker.setAttribute('visible', false)
+				cloneVR.setAttribute('visible', true)
 				this.el.removeAttribute('embedded')
 				this.el.removeAttribute('arjs')
-				cloneAR = sceneAR.cloneNode(true)
-				cloneVR = document.createElement('a-entity')
-				cloneVR.innerHTML = sceneAR.querySelector(this.data.parent).innerHTML
-				sceneAR.insertAdjacentElement('afterend', cloneVR)
-				element.parentNode.removeChild(sceneAR)
 				document.querySelector('#arjs-video').style.display = 'none'
 			} else {
 				this.el.setAttributeNode(embedded)
 				this.el.setAttributeNode(arjs)
-				this.el.appendChild(sceneAR)
-				element.parentNode.removeChild(cloneVR)
+				marker.setAttribute('visible', true)
+				cloneVR.setAttribute('visible', false)
 				document.querySelector('#arjs-video').style.display = 'block'
 			}
-			state = !state
 		}
 	}
 })
