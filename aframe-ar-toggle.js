@@ -1,7 +1,7 @@
 AFRAME.registerComponent('ar-toggle', {
 	schema: {
 		marker: { default: 'a-marker' },
-		parent: { default: '#null' }
+		parent: { default: 'a-marker' }
 	},
 	init: function() {
 		const embedded = this.el.getAttributeNode('embedded')
@@ -18,7 +18,6 @@ AFRAME.registerComponent('ar-toggle', {
 		this.el.appendChild(cloneVR)
 
 		window.ondblclick = () => {
-			toggleAttributes()
 			if (this.el.hasAttribute('arjs')) {
 				marker.setAttribute('visible', false)
 				cloneVR.setAttribute('visible', true)
