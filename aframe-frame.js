@@ -29,7 +29,7 @@ AFRAME.registerComponent('frame', {
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
         const el = document.createElement('a-plane')
         el.id = name
-        el.object3D.rotation.set(HALF_PI, 0, 0)
+        el.object3D.rotation.set(-HALF_PI, 0, 0)
         el.object3D.scale.set(SCALE, SCALE, 0)
         self.appendChild(el)
         el.setAttribute('occlude', true)
