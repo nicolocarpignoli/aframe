@@ -44,7 +44,7 @@ AFRAME.registerComponent('frame', {
     function addFrame() {
       const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
       const HALF_BORDER = BORDER_SIZE / 2
-      const OFFSET = 0.001
+      const OFFSET = 0.005
       if (FRAME_EL) FRAME_EL.parentNode.removeChild(FRAME_EL)
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
         const el = FRAME_EL ? FRAME_EL.cloneNode(true) : document.createElement('a-box')
