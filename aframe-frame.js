@@ -2,8 +2,8 @@ AFRAME.registerComponent('frame', {
   schema: {
     width: { default: 1 },
     height: { default: 1 },
-    scale: { default: 10 },
-    borderSize: { default: 0 }
+    scale: { default: 20 },
+    frameEl: { default: '' }
   },
   init: function() {
     const WIDTH = this.data.width
@@ -15,19 +15,13 @@ AFRAME.registerComponent('frame', {
     const SCALE = this.data.scale
     const HALF_SCALE = SCALE / 2
     const HALF_PI = Math.PI / 2
-    const BORDER_SIZE = this.data.borderSize
-    const HALF_BORDER = BORDER_SIZE / 2
-
-    const PARTS = ['right', 'left', 'top', 'bottom']
+    const FRAME_EL = document.querySelector(this.data.frameEl)
 
     const self = this.el
-
     self.id = 'frame'
-    self.object3D.position.set(0, 0, 0)
-    self.object3D.scale.set(1, 1, 1)
 
     addFrameOccluder()
-    if (BORDER_SIZE > 0) addFrame()
+    addFrame()
 
     this.update()
 
@@ -35,10 +29,10 @@ AFRAME.registerComponent('frame', {
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
         const el = document.createElement('a-plane')
         el.id = name
-        el.setAttribute('occlude', true)
         el.object3D.rotation.set(HALF_PI, 0, 0)
         el.object3D.scale.set(SCALE, SCALE, 0)
         self.appendChild(el)
+        el.setAttribute('occlude', true)
         return el
       })
 
@@ -47,27 +41,29 @@ AFRAME.registerComponent('frame', {
       parts[2].object3D.position.set(0, 0, -(HALF_HEIGHT + HALF_SCALE))
       parts[3].object3D.position.set(0, 0, HALF_HEIGHT + HALF_SCALE)
     }
-
     function addFrame() {
+      const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
+      const HALF_BORDER = BORDER_SIZE / 2
+      const OFFSET = 0.001
+      if (FRAME_EL) FRAME_EL.parentNode.removeChild(FRAME_EL)
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
-        const el = document.createElement('a-box')
-        el.setAttribute('color', 'black')
+        const el = FRAME_EL ? FRAME_EL.cloneNode(true) : document.createElement('a-box')
         el.id = name
         self.appendChild(el)
         return el
       })
 
       parts[0].object3D.position.set(HALF_WIDTH - HALF_BORDER, -HALF_DEPTH, 0)
-      parts[0].object3D.scale.set(BORDER_SIZE, DEPTH, HEIGHT)
+      parts[0].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
 
       parts[1].object3D.position.set(-(HALF_WIDTH - HALF_BORDER), -HALF_DEPTH, 0)
-      parts[1].object3D.scale.set(BORDER_SIZE, DEPTH, HEIGHT)
+      parts[1].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
 
-      parts[2].object3D.position.set(0, -HALF_DEPTH, -(HALF_HEIGHT - HALF_BORDER))
-      parts[2].object3D.scale.set(WIDTH, DEPTH, BORDER_SIZE)
+      parts[2].object3D.position.set(0, -HALF_DEPTH - OFFSET, -(HALF_HEIGHT - HALF_BORDER))
+      parts[2].setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
 
-      parts[3].object3D.position.set(0, -HALF_DEPTH, HALF_HEIGHT - HALF_BORDER)
-      parts[3].object3D.scale.set(WIDTH, DEPTH, BORDER_SIZE)
+      parts[3].object3D.position.set(0, -HALF_DEPTH - OFFSET, HALF_HEIGHT - HALF_BORDER)
+      parts[3].setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
     }
   }
 })
@@ -78,6 +74,9 @@ AFRAME.registerComponent('occlude', {
     var mesh = el.getObject3D('mesh')
     var material = new THREE.MeshBasicMaterial({
       colorWrite: false
+      //transparent: true,
+      //opacity: 0.5,
+      //side: THREE.BackSide
     })
     mesh.material = material
   }
