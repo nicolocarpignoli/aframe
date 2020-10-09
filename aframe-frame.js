@@ -43,7 +43,6 @@ AFRAME.registerComponent('frame', {
     function addFrame() {
       const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
       const HALF_BORDER = BORDER_SIZE / 2
-      const OFFSET = 0.005
       if (FRAME_EL) FRAME_EL.parentNode.removeChild(FRAME_EL)
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
         const el = FRAME_EL ? FRAME_EL.cloneNode(true) : document.createElement('a-box')
@@ -53,15 +52,15 @@ AFRAME.registerComponent('frame', {
       })
 
       parts[0].object3D.position.set(HALF_WIDTH - HALF_BORDER, -HALF_DEPTH, 0)
-      parts[0].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
+      parts[0].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT - 2 * BORDER_SIZE}`)
 
       parts[1].object3D.position.set(-(HALF_WIDTH - HALF_BORDER), -HALF_DEPTH, 0)
-      parts[1].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
+      parts[1].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT - 2 * BORDER_SIZE}`)
 
-      parts[2].object3D.position.set(0, -HALF_DEPTH - OFFSET, -(HALF_HEIGHT - HALF_BORDER))
+      parts[2].object3D.position.set(0, -HALF_DEPTH, -(HALF_HEIGHT - HALF_BORDER))
       parts[2].setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
 
-      parts[3].object3D.position.set(0, -HALF_DEPTH - OFFSET, HALF_HEIGHT - HALF_BORDER)
+      parts[3].object3D.position.set(0, -HALF_DEPTH, HALF_HEIGHT - HALF_BORDER)
       parts[3].setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
     }
 
