@@ -19,7 +19,7 @@ AFRAME.registerComponent('frame', {
     self.id = 'frame'
 
     addFrameOccluder()
-    addFrame()
+    if (FRAME_EL) addFrame()
 
     function addFrameOccluder() {
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
@@ -39,10 +39,11 @@ AFRAME.registerComponent('frame', {
     }
 
     function addFrame() {
-      const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
-      const DEPTH = FRAME_EL ? FRAME_EL.object3D.scale.z : 0.01
+      const BORDER_SIZE = FRAME_EL.object3D.scale.x
+      const DEPTH = FRAME_EL.object3D.scale.z
       const HALF_DEPTH = DEPTH / 2
       const HALF_BORDER = BORDER_SIZE / 2
+
       if (FRAME_EL) FRAME_EL.parentNode.removeChild(FRAME_EL)
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
         const el = FRAME_EL ? FRAME_EL.cloneNode(true) : document.createElement('a-box')
