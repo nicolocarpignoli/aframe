@@ -8,7 +8,7 @@ AFRAME.registerComponent('frame', {
   init: function() {
     const WIDTH = this.data.width
     const HEIGHT = this.data.height
-    const DEPTH = 0.1
+    const DEPTH = 0.05
     const HALF_WIDTH = WIDTH / 2
     const HALF_HEIGHT = HEIGHT / 2
     const HALF_DEPTH = DEPTH / 2
@@ -22,8 +22,6 @@ AFRAME.registerComponent('frame', {
 
     addFrameOccluder()
     addFrame()
-
-    this.update()
 
     function addFrameOccluder() {
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
@@ -41,6 +39,7 @@ AFRAME.registerComponent('frame', {
       parts[2].object3D.position.set(0, 0, -(HALF_HEIGHT + HALF_SCALE))
       parts[3].object3D.position.set(0, 0, HALF_HEIGHT + HALF_SCALE)
     }
+
     function addFrame() {
       const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
       const HALF_BORDER = BORDER_SIZE / 2
@@ -65,6 +64,8 @@ AFRAME.registerComponent('frame', {
       parts[3].object3D.position.set(0, -HALF_DEPTH - OFFSET, HALF_HEIGHT - HALF_BORDER)
       parts[3].setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
     }
+
+    this.update()
   }
 })
 
