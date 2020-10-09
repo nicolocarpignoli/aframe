@@ -1,11 +1,10 @@
 <html>
   <head>
     <script src="https://unpkg.com/aframe@latest"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="aframe-frame.js"></script>
   </head>
   <body>
-    <a-scene embedded arjs background="color: black" vr-mode-ui="enabled: false">
+    <a-scene background="color: black" vr-mode-ui="enabled: false">
       <a-assets>
         <image
           id="wood"
@@ -17,23 +16,19 @@
         ></image>
       </a-assets>
       <a-box id="frame" scale="0.1" src="#wood"></a-box>
-
-      <a-marker preset="hiro" smooth="true">
-        <a-entity rotation="-90 0 0" position="0 2 -4">
-          <a-entity frame="width: 4; height: 6; frameEl: #frame"></a-entity>
-          <a-sphere
-            scale="-1 1 1"
-            rotation="-90 90 90"
-            radius="10"
-            phi-length="180"
-            theta-length="180"
-            src="#sky"
-            material="side: back"
-          ></a-sphere>
-          <!--<a-sphere position="0 4 0" rotation="-180 90 90" phi-length="360"></a-sphere>-->
-        </a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
+      <a-entity rotation="-90 0 0" position="0 2 -4">
+        <a-entity frame="width: 4; height: 6; frameEl: #frame"></a-entity>
+        <a-sphere
+          scale="-1 1 1"
+          rotation="-90 90 90"
+          radius="10"
+          phi-length="180"
+          theta-length="180"
+          src="#sky"
+          material="side: back"
+        ></a-sphere>
+        <!--<a-sphere position="0 4 0" rotation="-180 90 90" phi-length="360"></a-sphere>-->
+      </a-entity>
     </a-scene>
   </body>
 </html>
