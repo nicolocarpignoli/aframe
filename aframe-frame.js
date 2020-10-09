@@ -8,10 +8,8 @@ AFRAME.registerComponent('frame', {
   init: function() {
     const WIDTH = this.data.width
     const HEIGHT = this.data.height
-    const DEPTH = 0.05
     const HALF_WIDTH = WIDTH / 2
     const HALF_HEIGHT = HEIGHT / 2
-    const HALF_DEPTH = DEPTH / 2
     const SCALE = this.data.scale
     const HALF_SCALE = SCALE / 2
     const HALF_PI = Math.PI / 2
@@ -42,6 +40,8 @@ AFRAME.registerComponent('frame', {
 
     function addFrame() {
       const BORDER_SIZE = FRAME_EL ? FRAME_EL.object3D.scale.x : 0.1
+      const DEPTH = FRAME_EL ? FRAME_EL.object3D.scale.z : 0.01
+      const HALF_DEPTH = DEPTH / 2
       const HALF_BORDER = BORDER_SIZE / 2
       if (FRAME_EL) FRAME_EL.parentNode.removeChild(FRAME_EL)
       const parts = ['left', 'right', 'top', 'bottom'].map(name => {
