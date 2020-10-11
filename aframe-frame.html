@@ -2,9 +2,6 @@
   <head>
     <script src="https://unpkg.com/aframe@latest"></script>
     <script src="aframe-frame.js"></script>
-    <script defer>
-      window.onclick = () => document.querySelector('video').play()
-    </script>
   </head>
   <body>
     <a-scene background="color: black" vr-mode-ui="enabled: false">
@@ -12,16 +9,17 @@
         <image
           id="wood"
           src="https://images.unsplash.com/photo-1533035350251-aa8b8e208d95?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-        ></image>
-        <!-- <image
+          crossorigin="anonymous"
+          ></image>
+        <image
           id="sky"
           src="https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
-        ></image> -->
-        <video id="sky" src="360.mp4" autoplay muted loop> </video>
+          crossorigin="anonymous"
+          ></image>
       </a-assets>
-      <a-box id="frame" scale="0.2 0.2 0.1" src="#wood"></a-box>
-      <a-entity rotation="90 0 0" position="0 2 -4">
-        <a-entity frame="width: 4; height: 6; frameEl: #frame"></a-entity>
+      <a-box id="frame" scale="0.1 0.1 0.1" src="#wood" visible="false"></a-box>
+      <a-entity rotation="90 0 0" position="0 1.6 -2">
+        <a-entity frame="frameEl: #frame"></a-entity>
         <a-sphere
           scale="-1 1 1"
           rotation="90 -90 90"
@@ -34,5 +32,9 @@
         <!--<a-sphere position="0 4 0" rotation="-180 90 90" phi-length="360"></a-sphere>-->
       </a-entity>
     </a-scene>
+    <script >
+      video = document.querySelectorAll("video")
+      if (video.length > 0) window.onclick = () => video.play()
+    </script>
   </body>
 </html>
