@@ -66,12 +66,12 @@ AFRAME.registerComponent('frame', {
 
       parts[2].object3D.position.set(0, HALF_DEPTH, -(HALF_HEIGHT + HALF_BORDER))
       parts[2].object3D.rotation.set(0, HALF_PI, 0)
-      parts[2].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
+      parts[2].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${WIDTH}`)
       // setAttribute('scale', `${WIDTH}, ${DEPTH}, ${BORDER_SIZE}`)
 
       parts[3].object3D.position.set(0, HALF_DEPTH, HALF_HEIGHT + HALF_BORDER)
       parts[3].object3D.rotation.set(0, HALF_PI, 0)
-      parts[3].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${HEIGHT}`)
+      parts[3].setAttribute('scale', `${BORDER_SIZE}, ${DEPTH}, ${WIDTH}`)
     }
 
     this.update()
