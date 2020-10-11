@@ -3,7 +3,7 @@ AFRAME.registerComponent('frame', {
     width: { default: 1 },
     height: { default: 1 },
     scale: { default: 20 },
-    frameEl: { default: '', type: "selector" }
+    frameEl: { default: '#frame', type: "selector" }
   },
   init: function() {
     const WIDTH = this.data.width
@@ -21,7 +21,7 @@ AFRAME.registerComponent('frame', {
     console.log(FRAME_EL)
 
     addFrameOccluder()
-    if (FRAME_EL) addFrame()
+    if (FRAME_EL !== null) addFrame()
 
     function addFrameOccluder() {
       console.log("Adding frameOccluder")
